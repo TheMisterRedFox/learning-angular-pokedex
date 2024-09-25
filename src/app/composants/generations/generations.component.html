@@ -1,0 +1,11 @@
+<div class="generation-list">
+    <h2>Liste des générations</h2>
+    <ul>
+        @for (generation of generationsList; track $index) {
+            <li>
+                {{ generation }}
+            </li>
+        }
+    </ul>
+</div>
+

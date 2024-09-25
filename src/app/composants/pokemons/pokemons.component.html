@@ -1,0 +1,35 @@
+<div class="pokemon-component">
+    
+    @defer(on timer(1s)){
+        <p class="nb-of-pokemons">{{ getCountPokemon() }} pokémons en base de données :</p>
+        <div class="pokemon-list">
+            @for (pokemon of pokemons; track $index) {
+                <div class="pokemon-card" [style]="getPokemonTypeBackgroundColor(pokemon)">
+                    @if (pokemon.sprite) {
+                        <img [src]="pokemon.sprite" [alt]="pokemon.name">
+                    } @else {
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png" [alt]="pokemon.name">
+                    }
+                    <p class="pokedex-id">{{ pokemon.id.toString().padStart(3, '0') }}</p>
+                    <p><span class="category-name">Nom : </span>{{ pokemon.name }}</p>
+                    <p><span class="category-name">Catégorie : </span>{{ pokemon.category }}</p>
+                    <p><span class="category-name">Type : </span>{{ pokemon.type.toString() }}</p>
+                    <p><span class="category-name">Taille : </span>{{ pokemon.size }}</p>
+                    <p><span class="category-name">Poids : </span>{{ pokemon.weight }}</p>
+                </div>
+            }
+        </div>
+    } 
+    @placeholder {
+        <div class="pokemon-loader">
+            <div class="pokemon-spinner"></div>
+            <p>Chargement des pokémons...</p>
+        </div>
+        
+    }
+    
+
+    
+</div>
+
+
