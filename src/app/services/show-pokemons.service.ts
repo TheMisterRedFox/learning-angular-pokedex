@@ -16,4 +16,8 @@ export class ShowPokemonsService {
   fetchPokemon(): any {
     return this.httpClient.get(`https://tyradex.vercel.app/api/v1/pokemon`);
   }
+
+  fetchPokemonById(id: number): any {
+    return this.httpClient.get(`https://tyradex.vercel.app/api/v1/pokemon/${id}`);
+  }
 }

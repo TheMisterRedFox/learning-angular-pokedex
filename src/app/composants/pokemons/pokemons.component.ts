@@ -3,11 +3,12 @@ import { Pokemon } from '../../interfaces/pokemon';
 import { ShowPokemonsService } from '../../services/show-pokemons.service';
 import { JsonPipe } from '@angular/common';
 import { GenerationsComponent } from '../generations/generations.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-pokemons',
   standalone: true,
-  imports: [JsonPipe, GenerationsComponent],
+  imports: [JsonPipe, GenerationsComponent, RouterLink],
   templateUrl: './pokemons.component.html',
   styleUrl: './pokemons.component.less'
 })

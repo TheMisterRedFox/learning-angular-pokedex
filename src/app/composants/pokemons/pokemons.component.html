@@ -18,6 +18,7 @@
                     <p><span class="category-name">Type : </span>{{ pokemon.type.toString() }}</p>
                     <p><span class="category-name">Taille : </span>{{ pokemon.size }}</p>
                     <p><span class="category-name">Poids : </span>{{ pokemon.weight }}</p>
+                    <a [routerLink]="['/pokemon', pokemon.id]">Voir les détails</a>
                 </div>
             }
         </div>

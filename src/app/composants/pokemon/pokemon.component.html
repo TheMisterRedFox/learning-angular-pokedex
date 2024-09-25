@@ -1,0 +1,12 @@
+<div class="pokemon-card">
+    @if (pokemon?.sprite) {
+        <img [src]="pokemon?.sprite" [alt]="pokemon?.name">
+    } @else {
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png" [alt]="pokemon?.name">
+    }
+    <p><span class="category-name">Nom : </span>{{ pokemon?.name }}</p>
+    <p><span class="category-name">Catégorie : </span>{{ pokemon?.category }}</p>
+    <p><span class="category-name">Type : </span>{{ pokemon?.type?.toString() }}</p>
+    <p><span class="category-name">Taille : </span>{{ pokemon?.size }}</p>
+    <p><span class="category-name">Poids : </span>{{ pokemon?.weight }}</p>
+</div>
