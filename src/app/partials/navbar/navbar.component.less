@@ -1,0 +1,38 @@
+.header {
+    background-color:#e2e2e2;
+    border-bottom: 1px solid rgb(158, 158, 158);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 10px;
+    margin-bottom: 25px;
+
+    .app-title {
+        h2 {
+            // Nothing for moment
+        }
+    }
+
+    ul.header-links {
+        list-style-type: none;
+        display: flex;
+        gap: 15px;
+
+        li {
+            a {
+                color: black;
+                text-decoration: none;
+                transition: 0.1s;
+
+                &:visited, &:clicked {
+                    color: black;
+                }
+
+                &:hover {
+                    color: rgb(2, 62, 141);
+                }
+            }
+        }
+    }
+
+}

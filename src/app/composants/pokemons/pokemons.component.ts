@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Pokemon } from '../../interfaces/pokemon';
 import { ShowPokemonsService } from '../../services/show-pokemons.service';
 import { JsonPipe } from '@angular/common';
+import { GenerationsComponent } from '../generations/generations.component';
 
 @Component({
   selector: 'app-pokemons',
   standalone: true,
-  imports: [JsonPipe],
+  imports: [JsonPipe, GenerationsComponent],
   templateUrl: './pokemons.component.html',
   styleUrl: './pokemons.component.less'
 })
@@ -35,9 +36,7 @@ export class PokemonsComponent {
   };
 
   constructor(pokemonService: ShowPokemonsService) {
-   pokemonService.get100FirstPokemons().then(pokemons => {
-     this.pokemons = pokemons;
-   });
+     this.getPokemons(pokemonService);
    }
 
    getCountPokemon(): number {
@@ -59,6 +58,34 @@ export class PokemonsComponent {
       } else {
          return `background: ${this.pokemonTypeColors[pokemon.type[0]]}`;
       }
+   }
+
+   getPokemons(pokemonService: ShowPokemonsService){
+      pokemonService.fetchPokemon().subscribe({
+         next: (data: Array<any>) => {
+           this.pokemons = [];
+           data.forEach((pokemon: any) => {
+             if(pokemon.pokedex_id !== 0) {
+               this.pokemons.push({
+                 id: pokemon.pokedex_id,
+                 name: pokemon.name.fr,
+                 category: pokemon.category,
+                 type: pokemon.types.map((type: any) => type.name),
+                 sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.pokedex_id}.png`,
+                 weight: pokemon.weight,
+                 size: pokemon.height
+               });
+             }
+           });
+ 
+           this.pokemons.sort((a: Pokemon, b: Pokemon) => {
+             return a.id < b.id ? -1 : 1;
+           });
+         },
+         error: (error: any) => {
+           console.error(error);
+         }
+       });
    }
 
 }

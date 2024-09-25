@@ -1,0 +1,12 @@
+<header class="header">
+    <div class="app-title">
+        <h2>Angular - Exercice appel d'API & Routage (PokémonManager)</h2>
+    </div>
+    <ul class="header-links">
+        @for (link of links; track $index) {
+            <li>
+                <a [routerLink]="link.route">{{ link.name }}</a>
+            </li>
+        }
+    </ul>
+</header>
