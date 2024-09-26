@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ShowPokemonsService } from '../../services/show-pokemons.service';
+import { Component, inject, OnInit } from '@angular/core';
+import { FetchPokemonService } from '../../services/fetch-pokemon.service';
 import { Pokemon } from '../../interfaces/pokemon';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -10,23 +10,27 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './pokemon.component.html',
   styleUrl: './pokemon.component.less'
 })
-export class PokemonComponent {
+export class PokemonComponent implements OnInit {
 
   pokemon?: Pokemon;
   searchPokemonId: number = 0;
+  fetchPokemonService: FetchPokemonService;
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
-  constructor(pokemonService: ShowPokemonsService, private route: ActivatedRoute, private router: Router) {
-    this.getSpecificPokemons(pokemonService);
+  constructor(fetchPokemonService: FetchPokemonService) {
+    this.fetchPokemonService = fetchPokemonService;
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe((params) => {
-    console.log(params);
-    this.searchPokemonId = parseInt(params["id"]);
+    this.route.params.subscribe(params => {
+       this.searchPokemonId = params['id'];
     });
-    }
+    this.getSpecificPokemons(this.fetchPokemonService);
+  }
 
-  getSpecificPokemons(pokemonService: ShowPokemonsService){
+  getSpecificPokemons(pokemonService: FetchPokemonService){
+    console.log(this.searchPokemonId)
     pokemonService.fetchPokemonById(this.searchPokemonId).subscribe({
        next: (pokemon: any) => {
         console.log(pokemon);

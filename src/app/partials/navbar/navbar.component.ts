@@ -13,6 +13,7 @@ export class NavbarComponent {
 
   links: Array<{route: string, name: string}> = [
     {route: 'home', name: 'Accueil'},
+    {route: 'generations', name: 'Générations'},
     {route: 'pokemons', name: 'Pokemons'}
   ];
 }

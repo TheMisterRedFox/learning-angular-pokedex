@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Pokemon } from '../../interfaces/pokemon';
-import { ShowPokemonsService } from '../../services/show-pokemons.service';
+import { FetchPokemonService } from '../../services/fetch-pokemon.service';
 import { JsonPipe } from '@angular/common';
 import { GenerationsComponent } from '../generations/generations.component';
 import { RouterLink } from '@angular/router';
@@ -36,8 +36,8 @@ export class PokemonsComponent {
       Glace: "rgba(152, 216, 216, 0.5)"
   };
 
-  constructor(pokemonService: ShowPokemonsService) {
-     this.getPokemons(pokemonService);
+  constructor(fetchPokemonService: FetchPokemonService) {
+     this.getPokemons(fetchPokemonService);
    }
 
    getCountPokemon(): number {
@@ -61,8 +61,8 @@ export class PokemonsComponent {
       }
    }
 
-   getPokemons(pokemonService: ShowPokemonsService){
-      pokemonService.fetchPokemon().subscribe({
+   getPokemons(fetchPokemonService: FetchPokemonService){
+    fetchPokemonService.fetchPokemon().subscribe({
          next: (data: Array<any>) => {
            this.pokemons = [];
            data.forEach((pokemon: any) => {
